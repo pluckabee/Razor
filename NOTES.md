@@ -90,3 +90,13 @@ Cons: Managing two type objects that are virtually the same can be cumbersome. P
 Keep the objects entirely separate
 Pros: Nice and clean, never going to be confusing. More flexible, can use the user rating model in more places in the future
 Cons: Reconciling two sources at a level up from the API layer is harder to manage
+
+App structure
+
+├─ src/
+│  ├─ assets/
+│  ├─ services/
+│  ├─ hooks/
+│  ├─ components/
+│  ├─ types/
+│  ├─ App.tsx
