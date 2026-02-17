@@ -1,25 +1,25 @@
 Tasks
 
-Initial Planning
-research the API
-Bootstrap the app using vite with react-ts 
-Map out data model and types
-Map out components
-Map out Views and app states
+Initial Planning - Done
+research the API - Done
+Bootstrap the app using vite with react-ts - Done
+Map out data model and types - Done
+Map out components - Done
+Map out Views and app states - Done
 3 hrs
 
-Create skeleton app with user journey and state manager (add React router)
-Create interface to call API layer
-Create interface to call local storage for user reviews
-2 hrs
+Create skeleton app with user journey and state manager (add React router) - Done
+Create interface to call API layer - Done
+Create interface to call local storage for user reviews - Done
+4 hrs
 
 Design screens and components
 2 hrs
 
 Build components
-4 hrs
+2 hrs
 
-Connect everything up
+Connect everything up - Done
 1hr
 
 Test
@@ -90,6 +90,8 @@ Cons: Managing two type objects that are virtually the same can be cumbersome. P
 Keep the objects entirely separate
 Pros: Nice and clean, never going to be confusing. More flexible, can use the user rating model in more places in the future
 Cons: Reconciling two sources at a level up from the API layer is harder to manage
+
+
 
 App structure
 
