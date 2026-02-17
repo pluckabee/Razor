@@ -1,0 +1,19 @@
+.error-message {
+	background: rgba(228, 102, 88, 0.18);
+	border: 1px solid rgba(228, 102, 88, 0.5);
+	color: var(--color-graphite-gray);
+	padding: 1rem 1.25rem;
+	border-radius: 14px;
+	display: grid;
+	gap: 0.35rem;
+	box-shadow: 0 10px 24px rgba(52, 52, 52, 0.12);
+}
+
+.error-message__title {
+	font-weight: 700;
+	color: var(--color-twilight-indigo);
+}
+
+.error-message__body {
+	font-size: 0.95rem;
+}

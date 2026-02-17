@@ -75,12 +75,6 @@ export function MovieCard({ movie }: MovieCardProps) {
         {details ? (
           <>
             <p className="movie-card__plot">{details.Plot}</p>
-            <div className="movie-card__meta">
-                <span> Director: {details.Director}</span>
-                <span> Actors: {details.Actors}</span>
-              <span>{details.Genre}</span>
-              <span>{details.Runtime}</span>
-            </div>
           </>
         ) : null}
       </div>

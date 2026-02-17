@@ -4,6 +4,10 @@ import { useMovieSearch } from "../hooks/useMovieSearch";
 import { SearchForm } from "../components/SearchForm";
 import { Header } from "../components/Header";
 import { SearchResults } from "../components/SearchResults";
+import { LoadingSpinner } from "../components/LoadingSpinner";
+import { ErrorMessage } from "../components/ErrorMessage";
+
+import "./SearchView.css";
 
 export function SearchView() {
   const { moviePage, isLoading, error, searchMovies } = useMovieSearch();
@@ -44,11 +48,12 @@ export function SearchView() {
           handleInput={handleInput}
         />
       </div>
-      {isLoading ? <div>Loader</div> : null}
-      {error ? <div>Error {error}</div> : null}
-      {moviePage?.Search ? (
-        <SearchResults movies={moviePage.Search} />
-      ) : null}
+      {isLoading ? <LoadingSpinner /> : null}
+      {error ? <ErrorMessage message={error} /> : null}
+      {moviePage?.Search ? <SearchResults movies={moviePage.Search} /> : null}
+      {!isLoading && !error && !hasResults && (
+        <div className="search-view__no-results">No results found.</div>
+      )}
     </>
   );
 }

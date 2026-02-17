@@ -3,7 +3,7 @@
    display: grid;
    grid-template-columns: 45% minmax(0, 1fr);
    gap: 1rem;
-   min-height: 270px;
+   height: 270px;
   padding: 1rem;
   border-radius: 12px;
   background: #141b2d;

@@ -5,6 +5,8 @@ import { useReviews } from "../hooks/useReviews";
 import type { MovieReview } from "../types/types";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import { Header } from "../components/Header";
+import { LoadingSpinner } from "../components/LoadingSpinner";
+import { ErrorMessage } from "../components/ErrorMessage";
 import "./SingleTitleView.css";
 
 export function SingleTitleView() {
@@ -65,8 +67,8 @@ export function SingleTitleView() {
   return (
     <div className="single-title">
   <Header size="small" useBrowserBack />
-      {isLoading ? <div className="single-title__loader">Loading...</div> : null}
-      {error ? <div className="single-title__error">Error {error}</div> : null}
+      {isLoading ? <LoadingSpinner /> : null}
+      {error ? <ErrorMessage message={error} /> : null}
       {movie ? (
         <>
           <section className="single-title__hero">
