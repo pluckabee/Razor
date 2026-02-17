@@ -4,6 +4,7 @@ import { useMovie } from "../hooks/useMovie";
 import { useReviews } from "../hooks/useReviews";
 import type { MovieReview } from "../types/types";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+import { Header } from "../components/Header";
 import "./SingleTitleView.css";
 
 export function SingleTitleView() {
@@ -63,6 +64,7 @@ export function SingleTitleView() {
 
   return (
     <div className="single-title">
+      <Header size="small" />
       {isLoading ? <div className="single-title__loader">Loading...</div> : null}
       {error ? <div className="single-title__error">Error {error}</div> : null}
       {movie ? (
