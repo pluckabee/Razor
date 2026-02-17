@@ -12,15 +12,15 @@ type UserRating =
 
 type UserReview = string;
 
-type UserRatingSourceId = `Razor:${UserId}:${UserReviewType}`
+type UserSourcedRatingId = `Razor:${string}:${UserId}:${UserReviewType}`
 type UserId = string;
 
 export interface User {
     userId: UserId;
 }
 
-export interface UserRatingSource extends OMDBRating {
-    Source: UserRatingSourceId;
+export interface UserSourcedRating extends OMDBRating {
+    Source: UserSourcedRatingId;
     Value: UserScore | UserRating | string;
 }
 
@@ -34,7 +34,7 @@ export interface MovieReview extends Pick<OMDBMovie, "imdbID"> {
 type OMDBResultType = "movie" | "series" | "episode";
 
 export interface OMDBSearchResponse {
-  Search: OMDBSearchResponse[];
+  Search: OMDBSearchResult[];
   totalResults: number;
   Response: StringBoolean;
 }
@@ -52,18 +52,18 @@ export interface OMDBMovie {
   Rated: string;
   Released: string;
   Runtime: string;
-  Genre: string[];
+  Genre: string;
   Director: string;
-  Writer: string[];
-  Actor: string;
+  Writer: string;
+  Actors: string;
   Plot: string;
-  Language: string[];
-  Country: string[];
+  Language: string;
+  Country: string;
   Awards: string;
   Ratings: OMDBRating[];
   Metascore: string;
   imdbRating: string;
-  imdbVotes: number;
+  imdbVotes: string;
   Type: "movie";
   DVD: string;
   BoxOffice: string;
@@ -74,4 +74,10 @@ export interface OMDBMovie {
 
 export interface OMDBSearchResult extends Pick<OMDBMovie, "Title"| "imdbID"| "Year"| "Poster"> {
     Type: OMDBResultType
+}
+
+export interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
 }
