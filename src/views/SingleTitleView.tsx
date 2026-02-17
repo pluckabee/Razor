@@ -64,7 +64,7 @@ export function SingleTitleView() {
 
   return (
     <div className="single-title">
-      <Header size="small" />
+  <Header size="small" useBrowserBack />
       {isLoading ? <div className="single-title__loader">Loading...</div> : null}
       {error ? <div className="single-title__error">Error {error}</div> : null}
       {movie ? (

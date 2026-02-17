@@ -10,9 +10,9 @@ interface SearchResultsProps {
 
 export function SearchResults({ movies }: SearchResultsProps) {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 4, md: 12 }}>
       {movies.map((movie) => (
-        <Grid key={movie.imdbID} size={4}>
+        <Grid key={movie.imdbID} size={{ xs: 1, sm: 2, md: 4 }} >
           <MovieCard movie={movie} />
         </Grid>
       ))}

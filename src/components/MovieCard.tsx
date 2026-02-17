@@ -52,11 +52,23 @@ export function MovieCard({ movie }: MovieCardProps) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="movie-card__header">
-        <h2>{movie.Title}</h2>
-        <span className="movie-card__year">{movie.Year}</span>
+      <div className="movie-card__poster">
+        <img src={movie.Poster} alt={movie.Title} />
       </div>
-      <img src={movie.Poster} alt={movie.Title} className="movie-card__poster" />
+      <div className="movie-card__content">
+        <div className="movie-card__header">
+          <h2>{movie.Title}</h2>
+          <span className="movie-card__year">{movie.Year}</span>
+        </div>
+        {details ? (
+          <div className="movie-card__meta">
+            <span>{details.Genre}</span>
+            <span>{details.Runtime}</span>
+            <span>Director: {details.Director}</span>
+            <span>Actors: {details.Actors}</span>
+          </div>
+        ) : null}
+      </div>
       <div className="movie-card__details" aria-hidden={!isExpanded}>
         {isLoading ? <div className="movie-card__loading">Loading...</div> : null}
         {error ? <div className="movie-card__error">{error}</div> : null}
