@@ -3,6 +3,7 @@ import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button, FormControl, MenuItem, Select, TextField } from "@mui/material";
 import type { MovieReview } from "../types/types";
+import "./UserReviewCard.css";
 
 interface UserReviewCardProps {
   imdbID: string;
@@ -88,20 +89,20 @@ export function UserReviewCard({
   };
 
   return (
-    <section className="single-title__reviews">
-      <div className="single-title__section-header">
+    <section className="user-review-card">
+      <div className="user-review-card__header">
         <h2>User Review</h2>
       </div>
-      <div className="single-title__review-summary">
+      <div className="user-review-card__summary">
         <div>
-          <div className="single-title__tickets">
+          <div className="user-review-card__tickets">
             {Array.from({ length: 5 }).map((_, index) => {
               const isActive = hasScore && index < score;
               const isHovered = hoverScore !== null && index < hoverScore;
               return (
                 <ConfirmationNumberIcon
                   key={`ticket-${index}`}
-                  className={`single-title__ticket${isActive ? " is-active" : ""}${
+                  className={`user-review-card__ticket${isActive ? " is-active" : ""}${
                     isHovered ? " is-hovered" : ""
                   }`}
                   aria-hidden="true"
@@ -112,7 +113,7 @@ export function UserReviewCard({
               );
             })}
           </div>
-          <span className="single-title__empty-subline">
+          <span className="user-review-card__subline">
             {hoverScore !== null
               ? "update score"
               : !hasScore
@@ -122,7 +123,7 @@ export function UserReviewCard({
         </div>
         <div>
           <blockquote
-            className="single-title__rating-quote single-title__rating-quote--interactive"
+            className="user-review-card__rating-quote user-review-card__rating-quote--interactive"
             onClick={() => setIsRatingEditing(true)}
             onMouseEnter={() => setHoverRating(true)}
             onMouseLeave={() => setHoverRating(false)}
@@ -155,7 +156,7 @@ export function UserReviewCard({
               <p>{!currentReview?.rating ? "..." : currentReview.rating}</p>
             )}
           </blockquote>
-          <span className="single-title__empty-subline">
+          <span className="user-review-card__subline">
             {hoverRating
               ? "update rating"
               : !currentReview?.rating
@@ -168,15 +169,15 @@ export function UserReviewCard({
           {isReviewEditing ? (
             <>
               <TextField
-                className="single-title__review-textarea"
+                className="user-review-card__textarea"
                 multiline
                 minRows={4}
                 value={reviewDraft}
                 onChange={(event) => setReviewDraft(event.target.value)}
               />
-              <div className="single-title__review-actions">
+              <div className="user-review-card__actions">
                 <Button
-                  className="single-title__review-save"
+                  className="user-review-card__save"
                   variant="contained"
                   type="button"
                   onClick={handleReviewSave}
@@ -184,7 +185,7 @@ export function UserReviewCard({
                   Save review
                 </Button>
                 <Button
-                  className="single-title__review-cancel"
+                  className="user-review-card__cancel"
                   variant="text"
                   type="button"
                   onClick={handleReviewCancel}
@@ -195,7 +196,7 @@ export function UserReviewCard({
             </>
           ) : currentReview?.review ? (
             <p
-              className="single-title__review-copy single-title__review-copy--interactive"
+              className="user-review-card__review-copy user-review-card__review-copy--interactive"
               onMouseEnter={() => setHoverReview(true)}
               onMouseLeave={() => setHoverReview(false)}
               onClick={() => setIsReviewEditing(true)}
@@ -206,16 +207,16 @@ export function UserReviewCard({
             </p>
           ) : (
             <span
-              className="single-title__empty-subline single-title__review-trigger"
+              className="user-review-card__subline user-review-card__trigger"
               role="button"
               tabIndex={0}
               onClick={() => setIsReviewEditing(true)}
             >
               Add your take on this film.
-              <EditIcon className="single-title__review-icon" aria-hidden="true" fontSize="small" />
+              <EditIcon className="user-review-card__icon" aria-hidden="true" fontSize="small" />
             </span>
           )}
-          <span className="single-title__empty-subline">
+          <span className="user-review-card__subline">
             {hoverReview
               ? "update review"
               : currentReview?.review

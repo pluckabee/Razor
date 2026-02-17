@@ -1,0 +1,134 @@
+.user-review-card {
+	background: #fff;
+	border-radius: 18px;
+	padding: 2rem;
+	box-shadow: 0 12px 30px rgba(52, 52, 52, 0.12);
+}
+
+.user-review-card__header h2 {
+	margin: 0 0 0.5rem;
+	color: var(--color-twilight-indigo);
+}
+
+.user-review-card__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+}
+
+.user-review-card__summary {
+	display: grid;
+	gap: 0.75rem;
+	text-align: center;
+}
+
+.user-review-card__tickets {
+	display: flex;
+	gap: 0.4rem;
+	color: rgba(47, 48, 97, 0.3);
+	justify-content: center;
+}
+
+.user-review-card__ticket {
+	font-size: 1.4rem;
+	color: rgba(47, 48, 97, 0.35);
+	cursor: pointer;
+}
+
+.user-review-card__ticket.is-active {
+	color: var(--color-twilight-indigo);
+}
+
+.user-review-card__ticket.is-hovered {
+	color: var(--color-steel-blue);
+	transition: color 0.15s ease;
+}
+
+.user-review-card__rating-quote {
+	position: relative;
+	margin: 0;
+	padding: 1.25rem 1.5rem;
+	border-radius: 14px;
+	border: 1px solid rgba(47, 48, 97, 0.15);
+	background: #fff;
+	font-style: italic;
+	color: var(--color-graphite-gray);
+	text-align: center;
+	display: grid;
+	place-items: center;
+	min-height: 90px;
+}
+
+.user-review-card__rating-quote::before,
+.user-review-card__rating-quote::after {
+	position: absolute;
+	font-size: 3rem;
+	font-weight: 700;
+}
+
+.user-review-card__rating-quote::before {
+	content: "“";
+	left: 1rem;
+	top: -0.5rem;
+}
+
+.user-review-card__rating-quote::after {
+	content: "”";
+	right: 1rem;
+	bottom: -1rem;
+}
+
+.user-review-card__rating-quote--interactive {
+	cursor: pointer;
+}
+
+.user-review-card__review-copy {
+	margin: 0;
+	font-size: 0.95rem;
+}
+
+.user-review-card__review-copy--interactive {
+	cursor: pointer;
+	padding: 0.5rem;
+	border-radius: 10px;
+	border: 1px solid transparent;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-review-card__review-copy--interactive:hover {
+	border-color: rgba(47, 48, 97, 0.35);
+	box-shadow: 0 0 0 2px rgba(47, 48, 97, 0.1);
+}
+
+.user-review-card__textarea {
+	width: 100%;
+}
+
+.user-review-card__actions {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	padding-top: 0.75rem;
+}
+
+.user-review-card__trigger {
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+.user-review-card__icon {
+	font-size: 0.95rem;
+}
+
+.user-review-card__subline {
+	display: block;
+	margin-top: 0.35rem;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: rgba(52, 52, 52, 0.55);
+	min-height: 1.1rem;
+}
