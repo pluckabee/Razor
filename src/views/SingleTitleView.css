@@ -120,6 +120,7 @@
 .single-title__ticket {
   font-size: 1.4rem;
   color: rgba(47, 48, 97, 0.35);
+  cursor: pointer;
 }
 
 .single-title__ticket.is-active {
@@ -165,13 +166,61 @@
   bottom: -1rem;
 }
 
+.single-title__rating-quote--interactive {
+  cursor: pointer;
+}
+
 .single-title__review-copy {
   margin: 0;
   font-size: 0.95rem;
 }
 
+.single-title__review-copy--interactive {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.single-title__review-copy--interactive:hover {
+  border-color: rgba(47, 48, 97, 0.35);
+  box-shadow: 0 0 0 2px rgba(47, 48, 97, 0.1);
+}
+
 .single-title__review-copy.is-empty {
   color: rgba(52, 52, 52, 0.6);
+}
+
+.single-title__review-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(47, 48, 97, 0.2);
+  font-family: inherit;
+  resize: vertical;
+}
+
+.single-title__review-save {
+  margin-top: 0.75rem;
+  background: var(--color-twilight-indigo);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.single-title__review-trigger {
+  cursor: pointer;
+  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.single-title__review-icon {
+  font-size: 0.95rem;
 }
 
 .single-title__empty-subline {
@@ -181,6 +230,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: rgba(52, 52, 52, 0.55);
+  height: 1.1rem;
 }
 
 .single-title__review-form {

@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+import EditIcon from "@mui/icons-material/Edit";
+import { Button, FormControl, MenuItem, Select, TextField } from "@mui/material";
 import type { MovieReview } from "../types/types";
 
 interface UserReviewCardProps {
@@ -17,22 +19,24 @@ export function UserReviewCard({
 }: UserReviewCardProps) {
   const movieReviews = useMemo(
     () => reviews.filter((review) => review.imdbID === imdbID),
-    [reviews, imdbID]
+    [reviews, imdbID],
   );
 
   const currentReview = movieReviews.find((review) => review.userId === userId);
 
-  const [score, setScore] = useState<number>(
-    () => (currentReview?.score ? Number(currentReview.score) : 0)
-  );
-  const [rating, setRating] = useState<MovieReview["rating"]>(
-    () => currentReview?.rating
-  );
-  const [reviewText, setReviewText] = useState<MovieReview["review"]>(
-    () => currentReview?.review ?? ""
-  );
-  const [isEditing, setIsEditing] = useState(!currentReview);
   const [hoverScore, setHoverScore] = useState<number | null>(null);
+  const [hoverRating, setHoverRating] = useState(false);
+  const [isRatingEditing, setIsRatingEditing] = useState(false);
+  const [ratingValue, setRatingValue] = useState<MovieReview["rating"] | "">(
+    () => currentReview?.rating ?? "",
+  );
+  const [isReviewEditing, setIsReviewEditing] = useState(false);
+  const [reviewDraft, setReviewDraft] = useState(
+    () => currentReview?.review ?? "",
+  );
+  const [hoverReview, setHoverReview] = useState(false);
+  const score = currentReview?.score ? Number(currentReview.score) : 0;
+  const hasScore = Boolean(currentReview?.score);
 
   const ratingOptions: NonNullable<MovieReview["rating"]>[] = [
     "Top Tier",
@@ -43,129 +47,183 @@ export function UserReviewCard({
     "Unwatchable",
   ];
 
-  const handleReviewSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleScoreClick = (value: number) => {
     addUserReview({
       imdbID,
       userId,
-      score: String(score) as MovieReview["score"],
-      rating,
-      review: reviewText,
+      score: String(value) as MovieReview["score"],
+      rating: currentReview?.rating,
+      review: currentReview?.review,
     });
-    setIsEditing(false);
   };
 
-  const hasScore = Boolean(currentReview?.score);
+  const handleRatingChange = (value: MovieReview["rating"] | "") => {
+    setRatingValue(value);
+    if (value) {
+      addUserReview({
+        imdbID,
+        userId,
+        score: currentReview?.score,
+        rating: value,
+        review: currentReview?.review,
+      });
+      setIsRatingEditing(false);
+    }
+  };
 
+  const handleReviewSave = () => {
+    addUserReview({
+      imdbID,
+      userId,
+      score: currentReview?.score,
+      rating: currentReview?.rating,
+      review: reviewDraft,
+    });
+    setIsReviewEditing(false);
+  };
+
+  const handleReviewCancel = () => {
+    setReviewDraft(currentReview?.review ?? "");
+    setIsReviewEditing(false);
+  };
 
   return (
     <section className="single-title__reviews">
       <div className="single-title__section-header">
         <h2>User Review</h2>
-        <button
-          className="single-title__edit-button"
-          type="button"
-          onClick={() => setIsEditing((value) => !value)}
-        >
-          {isEditing ? "Close" : currentReview ? "Edit" : "Add"}
-        </button>
       </div>
-      {!isEditing ? (
-        <div className="single-title__review-summary">
-          <div>
-            <div className="single-title__tickets">
-              {Array.from({ length: 5 }).map((_, index) => {
-                const isActive = hasScore && index < score;
-                const isHovered = hoverScore !== null && index < hoverScore;
-                return (
-                  <ConfirmationNumberIcon
-                    key={`ticket-${index}`}
-                    className={`single-title__ticket${isActive ? " is-active" : ""}${
-                      isHovered ? " is-hovered" : ""
-                    }`}
-                    aria-hidden="true"
-                    onMouseEnter={() => setHoverScore(index + 1)}
-                    onMouseLeave={() => setHoverScore(null)}
-                  />
-                );
-              })}
-            </div>
-            {!hasScore ? (
-              <span className="single-title__empty-subline">no user score</span>
-            ) : null}
+      <div className="single-title__review-summary">
+        <div>
+          <div className="single-title__tickets">
+            {Array.from({ length: 5 }).map((_, index) => {
+              const isActive = hasScore && index < score;
+              const isHovered = hoverScore !== null && index < hoverScore;
+              return (
+                <ConfirmationNumberIcon
+                  key={`ticket-${index}`}
+                  className={`single-title__ticket${isActive ? " is-active" : ""}${
+                    isHovered ? " is-hovered" : ""
+                  }`}
+                  aria-hidden="true"
+                  onMouseEnter={() => setHoverScore(index + 1)}
+                  onMouseLeave={() => setHoverScore(null)}
+                  onClick={() => handleScoreClick(index + 1)}
+                />
+              );
+            })}
           </div>
-          <div>
-            <blockquote className="single-title__rating-quote">
-              {!currentReview?.rating ? "..." : currentReview.rating}
-            </blockquote>
-            {!currentReview?.rating ? (
-              <span className="single-title__empty-subline">no user rating</span>
-            ) : null}
-          </div>
-          {currentReview?.review ? (
-            <div>
-              <h3>Review</h3>
-              <p className="single-title__review-copy">{currentReview.review}</p>
-            </div>
-          ) : (
-            <>
-              <p className="single-title__review-copy is-empty">
-                Add your take on this film.
-              </p>
-              <span className="single-title__empty-subline">no user review</span>
-            </>
-          )}
+          <span className="single-title__empty-subline">
+            {hoverScore !== null
+              ? "update score"
+              : !hasScore
+                ? "no user score"
+                : ""}
+          </span>
         </div>
-      ) : null}
-      {isEditing ? (
-        <form className="single-title__review-form" onSubmit={handleReviewSubmit}>
-          <label>
-            Score (1-5)
-            <select
-              value={score ?? 3}
-              onChange={(event) =>
-                setScore(event.target.value ? Number(event.target.value) : 3)
-              }
+        <div>
+          <blockquote
+            className="single-title__rating-quote single-title__rating-quote--interactive"
+            onClick={() => setIsRatingEditing(true)}
+            onMouseEnter={() => setHoverRating(true)}
+            onMouseLeave={() => setHoverRating(false)}
+            role="button"
+            tabIndex={0}
+          >
+            {isRatingEditing ? (
+              <FormControl size="small" fullWidth>
+                <Select
+                  value={ratingValue}
+                  displayEmpty
+                  onChange={(event) => {
+                    handleRatingChange(
+                      event.target.value as MovieReview["rating"],
+                    );
+                  }}
+                  onClose={() => setIsRatingEditing(false)}
+                >
+                  <MenuItem value="" disabled>
+                    Select rating
+                  </MenuItem>
+                  {ratingOptions.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            ) : (
+              <p>{!currentReview?.rating ? "..." : currentReview.rating}</p>
+            )}
+          </blockquote>
+          <span className="single-title__empty-subline">
+            {hoverRating
+              ? "update rating"
+              : !currentReview?.rating
+                ? "no user rating"
+                : ""}
+          </span>
+        </div>
+        <div>
+          <h3>Full Review</h3>
+          {isReviewEditing ? (
+            <>
+              <TextField
+                className="single-title__review-textarea"
+                multiline
+                minRows={4}
+                value={reviewDraft}
+                onChange={(event) => setReviewDraft(event.target.value)}
+              />
+              <div className="single-title__review-actions">
+                <Button
+                  className="single-title__review-save"
+                  variant="contained"
+                  type="button"
+                  onClick={handleReviewSave}
+                >
+                  Save review
+                </Button>
+                <Button
+                  className="single-title__review-cancel"
+                  variant="text"
+                  type="button"
+                  onClick={handleReviewCancel}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </>
+          ) : currentReview?.review ? (
+            <p
+              className="single-title__review-copy single-title__review-copy--interactive"
+              onMouseEnter={() => setHoverReview(true)}
+              onMouseLeave={() => setHoverReview(false)}
+              onClick={() => setIsReviewEditing(true)}
+              role="button"
+              tabIndex={0}
             >
-              {Array.from({ length: 5 }).map((_, index) => {
-                const value = String(index + 1);
-                return (
-                  <option key={value} value={value}>
-                    {value}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
-          <label>
-            Rating
-            <select
-              value={rating ?? "Just Okay"}
-              onChange={(event) =>
-                setRating(event.target.value as MovieReview["rating"])
-              }
+              {currentReview.review}
+            </p>
+          ) : (
+            <span
+              className="single-title__empty-subline single-title__review-trigger"
+              role="button"
+              tabIndex={0}
+              onClick={() => setIsReviewEditing(true)}
             >
-              {ratingOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="single-title__review-text">
-            Review
-            <textarea
-              rows={4}
-              value={reviewText ?? ""}
-              onChange={(event) => setReviewText(event.target.value)}
-              placeholder="What did you think?"
-            />
-          </label>
-          <button type="submit">
-            {currentReview ? "Update Review" : "Add Review"}
-          </button>
-        </form>
-      ) : null}
+              Add your take on this film.
+              <EditIcon className="single-title__review-icon" aria-hidden="true" fontSize="small" />
+            </span>
+          )}
+          <span className="single-title__empty-subline">
+            {hoverReview
+              ? "update review"
+              : currentReview?.review
+                ? ""
+                : "no user review"}
+          </span>
+        </div>
+      </div>
     </section>
   );
 }
