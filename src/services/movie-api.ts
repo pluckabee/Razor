@@ -92,6 +92,12 @@ class ApiService {
         };
       }
 
+      //if no entries, delay the response to simulate network latency and show loading state
+      if (data.Search?.length === 0 || data.Response === "False") {
+
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
+
       return {
         success: true,
         data,
