@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
-import EditIcon from "@mui/icons-material/Edit";
 import { Button, FormControl, MenuItem, Select, TextField } from "@mui/material";
 import type { MovieReview } from "../types/types";
 import "./UserReviewCard.css";
@@ -91,7 +90,7 @@ export function UserReviewCard({
   return (
     <section className="user-review-card">
       <div className="user-review-card__header">
-        <h2>User Review</h2>
+        <h2>My Review</h2>
       </div>
       <div className="user-review-card__summary">
         <div>
@@ -118,7 +117,7 @@ export function UserReviewCard({
               ? "update score"
               : !hasScore
                 ? "no user score"
-                : ""}
+                : `${score}/5`}
           </span>
         </div>
         <div>
@@ -213,7 +212,6 @@ export function UserReviewCard({
               onClick={() => setIsReviewEditing(true)}
             >
               Add your take on this film.
-              <EditIcon className="user-review-card__icon" aria-hidden="true" fontSize="small" />
             </span>
           )}
           <span className="user-review-card__subline">
