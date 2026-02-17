@@ -126,6 +126,11 @@
   color: var(--color-twilight-indigo);
 }
 
+.single-title__ticket.is-hovered {
+  color: var(--color-steel-blue);
+  transition: color 0.15s ease;
+}
+
 .single-title__rating-quote {
   position: relative;
   margin: 0;

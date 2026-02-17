@@ -32,6 +32,7 @@ export function UserReviewCard({
     () => currentReview?.review ?? ""
   );
   const [isEditing, setIsEditing] = useState(!currentReview);
+  const [hoverScore, setHoverScore] = useState<number | null>(null);
 
   const ratingOptions: NonNullable<MovieReview["rating"]>[] = [
     "Top Tier",
@@ -75,11 +76,16 @@ export function UserReviewCard({
             <div className="single-title__tickets">
               {Array.from({ length: 5 }).map((_, index) => {
                 const isActive = hasScore && index < score;
+                const isHovered = hoverScore !== null && index < hoverScore;
                 return (
                   <ConfirmationNumberIcon
                     key={`ticket-${index}`}
-                    className={`single-title__ticket${isActive ? " is-active" : ""}`}
+                    className={`single-title__ticket${isActive ? " is-active" : ""}${
+                      isHovered ? " is-hovered" : ""
+                    }`}
                     aria-hidden="true"
+                    onMouseEnter={() => setHoverScore(index + 1)}
+                    onMouseLeave={() => setHoverScore(null)}
                   />
                 );
               })}
