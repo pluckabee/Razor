@@ -8,7 +8,7 @@ Map out components
 Map out Views and app states
 3 hrs
 
-Create skeleton app with user journey and state manager
+Create skeleton app with user journey and state manager (add React router)
 Create interface to call API layer
 Create interface to call local storage for user reviews
 2 hrs
