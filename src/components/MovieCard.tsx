@@ -46,7 +46,8 @@ export function MovieCard({ movie }: MovieCardProps) {
   }, [isExpanded, loadMovie]);
 
   return (
-    <div
+    <Link
+      to={`/movie/${movie.imdbID}`}
       className={`movie-card${isExpanded ? " expanded" : ""}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -56,9 +57,6 @@ export function MovieCard({ movie }: MovieCardProps) {
         <span className="movie-card__year">{movie.Year}</span>
       </div>
       <img src={movie.Poster} alt={movie.Title} className="movie-card__poster" />
-      <Link to={`/movie/${movie.imdbID}`} className="movie-card__link">
-        More Info
-      </Link>
       <div className="movie-card__details" aria-hidden={!isExpanded}>
         {isLoading ? <div className="movie-card__loading">Loading...</div> : null}
         {error ? <div className="movie-card__error">{error}</div> : null}
@@ -66,13 +64,14 @@ export function MovieCard({ movie }: MovieCardProps) {
           <>
             <p className="movie-card__plot">{details.Plot}</p>
             <div className="movie-card__meta">
+                <span> Director: {details.Director}</span>
+                <span> Actors: {details.Actors}</span>
               <span>{details.Genre}</span>
               <span>{details.Runtime}</span>
-              <span>IMDb {details.imdbRating}</span>
             </div>
           </>
         ) : null}
       </div>
-    </div>
+    </Link>
   );
 }
