@@ -2,8 +2,7 @@
 
 import { MovieCard } from "./MovieCard";
 import type { OMDBSearchResult } from "../types/types";
-
-
+import { Grid } from "@mui/material";
 
 interface SearchResultsProps {
   movies: OMDBSearchResult[];
@@ -11,10 +10,12 @@ interface SearchResultsProps {
 
 export function SearchResults({ movies }: SearchResultsProps) {
   return (
-    <div>
+    <Grid container spacing={2}>
       {movies.map((movie) => (
-        <MovieCard key={movie.imdbID} movie={movie} />
+        <Grid key={movie.imdbID} size={4}>
+          <MovieCard movie={movie} />
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
-}
+}   

@@ -1,0 +1,51 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: #f5f7ff;
+  margin: 1rem 0 2rem;
+}
+
+.app-header--large {
+  font-size: 2.6rem;
+  letter-spacing: 0.02em;
+  flex-direction: column;
+}
+
+.app-header--small {
+  font-size: 1.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.app-header--small .app-header__icon-container .app-header__icon {
+  display: none
+}
+.app-header--small .app-header__icon-container  .app-header__icon:first-child {
+  display: inline-block;
+  transform: rotate(-15deg);
+}
+.app-header__icon-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.app-header__icon-container .app-header__icon:first-child {
+  transform: rotate(-15deg);
+}
+
+.app-header__icon-container .app-header__icon:last-child {
+  transform: rotate(15deg);
+  stroke: var(--color-twilight-indigo);
+  color: var(--color-royal-gold);
+}
+.app-header__icon {
+  font-size: 1.2em;
+  color: var(--color-twilight-indigo);
+  stroke: var(--color-royal-gold);
+}
+
+.app-header__title {
+  font-weight: 100;
+  color: var(--color-twilight-indigo);
+}

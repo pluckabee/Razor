@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useMovieSearch } from "../hooks/useMovieSearch";
-import { Search } from "../components/Search";
+import { SearchForm } from "../components/SearchForm";
+import { Header } from "../components/Header";
 import { SearchResults } from "../components/SearchResults";
 
 export function SearchView() {
   const { moviePage, isLoading, error, searchMovies } = useMovieSearch();
   const [searchString, setSearchString] = useState("");
+  const hasResults = (moviePage?.Search?.length ?? 0) > 0;
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,8 +21,9 @@ export function SearchView() {
 
   return (
     <>
+      <Header size={hasResults ? "small" : "large"} />
       <div>
-        <Search
+        <SearchForm
           handleSubmit={handleSearch}
           loading={isLoading}
           searchString={searchString}
@@ -29,7 +32,6 @@ export function SearchView() {
       </div>
       {isLoading ? <div>Loader</div> : null}
       {error ? <div>Error {error}</div> : null}
-      <div>Results</div>
       {moviePage?.Search ? (
         <SearchResults movies={moviePage.Search} />
       ) : null}

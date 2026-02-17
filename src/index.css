@@ -11,6 +11,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --color-royal-gold: #FFE66D;
+  --color-twilight-indigo: #2F3061;
+  --color-graphite-gray: #343434;
+  --color-mint-green: #F7FFF7;
+  --color-steel-blue: #6CA6C1;
 }
 
 a {
@@ -28,6 +33,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--color-royal-gold);
+  color: var(--color-graphite-gray);
 }
 
 h1 {

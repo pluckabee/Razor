@@ -1,0 +1,16 @@
+.MuiInputBase-root {
+  border-radius: 28px!important;
+  background-color: var(--color-mint-green);
+}
+
+.search-container {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.search-button.MuiButtonBase-root {
+  border-radius: 30px;
+  background-color: var(--color-twilight-indigo);
+  padding: 0.6em 1.2em;
+}
