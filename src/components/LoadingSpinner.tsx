@@ -12,7 +12,7 @@ export function LoadingSpinner() {
         padding: "3rem",
       }}
     >
-<span className="loader"></span>
+      <span className="loader"></span>
     </Box>
   );
 }
