@@ -14,6 +14,8 @@ export function SearchView() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";
   const [searchString, setSearchString] = useState(initialQuery);
+  const [hasManualSearch, setHasManualSearch] = useState(false);
+  const hasSearched = Boolean(initialQuery) || hasManualSearch;
   const hasResults = (moviePage?.Search?.length ?? 0) > 0;
 
   useEffect(() => {
@@ -26,8 +28,10 @@ export function SearchView() {
     e.preventDefault();
     searchMovies(searchString);
     if (searchString.trim()) {
+      setHasManualSearch(true);
       setSearchParams({ q: searchString.trim() });
     } else {
+      setHasManualSearch(false);
       setSearchParams({});
     }
   };
@@ -51,7 +55,7 @@ export function SearchView() {
       {isLoading ? <LoadingSpinner /> : null}
       {error ? <ErrorMessage message={error} /> : null}
       {moviePage?.Search ? <SearchResults movies={moviePage.Search} /> : null}
-      {!isLoading && !error && !hasResults && (
+      {!isLoading && !error && hasSearched && !hasResults && (
         <div className="search-view__no-results">No results found.</div>
       )}
     </>
