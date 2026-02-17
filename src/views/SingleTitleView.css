@@ -199,24 +199,6 @@
   color: #fff;
 }
 
-.single-title__review-list {
-  display: grid;
-  gap: 1rem;
-}
-
-.single-title__review-list article {
-  background: rgba(108, 166, 193, 0.15);
-  padding: 1rem;
-  border-radius: 12px;
-}
-
-.single-title__review-list article div {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
 
 .single-title__meta h2 {
   margin-top: 0;
@@ -248,12 +230,6 @@
   font-size: 0.95rem;
 }
 
-.single-title__loader,
-.single-title__error {
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  background: rgba(255, 230, 109, 0.4);
-}
 
 @media (max-width: 900px) {
   .single-title__hero {

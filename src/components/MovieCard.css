@@ -60,16 +60,6 @@
    display: block;
 }
 
- .movie-card__link {
-  color: #6aa6ff;
-  text-decoration: none;
-  font-weight: 600;
- }
-
- .movie-card__link:hover {
-  text-decoration: underline;
- }
-
  .movie-card__details {
     position: absolute;
     left: 0;
