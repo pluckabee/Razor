@@ -7,7 +7,7 @@ type UserRating =
   | "Really Great"
   | "Just Okay"
   | "So bad its good"
-  | "Pretty Bad"
+  | "Didn't like it"
   | "Unwatchable";
 
 type UserReview = string;

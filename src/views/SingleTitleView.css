@@ -1,0 +1,262 @@
+.single-title {
+  display: grid;
+  gap: 2rem;
+  padding: 1rem 0 3rem;
+  color: var(--color-graphite-gray);
+}
+
+.single-title__hero {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  background: var(--color-mint-green);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(47, 48, 97, 0.15);
+}
+
+.single-title__poster img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.single-title__headline h1 {
+  font-size: 2.8rem;
+  margin: 0 0 0.75rem;
+  color: var(--color-twilight-indigo);
+}
+
+.single-title__year {
+  font-weight: 500;
+  margin-left: 0.5rem;
+  color: var(--color-steel-blue);
+}
+
+.single-title__tagline {
+  font-weight: 600;
+  color: var(--color-steel-blue);
+  margin-bottom: 1rem;
+}
+
+.single-title__plot {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.single-title__credits {
+  display: grid;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+
+.single-title__credits span {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-steel-blue);
+}
+
+.single-title__reviews,
+.single-title__meta {
+  background: #fff;
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 12px 30px rgba(52, 52, 52, 0.12);
+}
+
+.single-title__section-header h2 {
+  margin: 0 0 0.5rem;
+  color: var(--color-twilight-indigo);
+}
+
+.single-title__section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.single-title__edit-button {
+  background: transparent;
+  border: 1px solid rgba(47, 48, 97, 0.4);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--color-twilight-indigo);
+  cursor: pointer;
+}
+
+.single-title__edit-button:hover {
+  border-color: var(--color-twilight-indigo);
+}
+
+.single-title__my-review {
+  margin: 1rem 0 2rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: rgba(108, 166, 193, 0.12);
+  display: grid;
+  gap: 1.5rem;
+}
+
+.single-title__review-summary {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.single-title__tickets {
+  display: flex;
+  gap: 0.4rem;
+  color: rgba(47, 48, 97, 0.3);
+}
+
+.single-title__ticket {
+  font-size: 1.4rem;
+  color: rgba(47, 48, 97, 0.35);
+}
+
+.single-title__ticket.is-active {
+  color: var(--color-twilight-indigo);
+}
+
+.single-title__rating-quote {
+  position: relative;
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 14px;
+  border: 1px solid rgba(47, 48, 97, 0.15);
+  background: #fff;
+  font-style: italic;
+  color: var(--color-graphite-gray);
+  text-align: center;
+  display: grid;
+  place-items: center;
+  min-height: 90px;
+}
+
+.single-title__rating-quote::before,
+.single-title__rating-quote::after {
+  position: absolute;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.single-title__rating-quote::before {
+  content: "“";
+  left: 1rem;
+  top: -0.5rem;
+}
+
+.single-title__rating-quote::after {
+  content: "”";
+  right: 1rem;
+  bottom: -1rem;
+}
+
+.single-title__review-copy {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.single-title__review-copy.is-empty {
+  color: rgba(52, 52, 52, 0.6);
+}
+
+.single-title__review-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem 1.5rem;
+}
+
+.single-title__review-form label {
+  display: grid;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--color-twilight-indigo);
+}
+
+.single-title__review-form select,
+.single-title__review-form textarea {
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(47, 48, 97, 0.25);
+  font-family: inherit;
+}
+
+.single-title__review-text {
+  grid-column: 1 / -1;
+}
+
+.single-title__review-form button {
+  grid-column: 1 / -1;
+  justify-self: start;
+  background: var(--color-twilight-indigo);
+  color: #fff;
+}
+
+.single-title__review-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.single-title__review-list article {
+  background: rgba(108, 166, 193, 0.15);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.single-title__review-list article div {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.single-title__meta h2 {
+  margin-top: 0;
+  color: var(--color-twilight-indigo);
+}
+
+.single-title__metascore {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.single-title__ratings {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.single-title__ratings div {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 230, 109, 0.2);
+}
+
+.single-title__extra {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.single-title__loader,
+.single-title__error {
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  background: rgba(255, 230, 109, 0.4);
+}
+
+@media (max-width: 900px) {
+  .single-title__hero {
+    grid-template-columns: 1fr;
+  }
+}
