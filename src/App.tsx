@@ -15,8 +15,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<SearchView/>} />
-          <Route path="/movie/id/:imdbID" element={<SingleTitleView/>} />
-          <Route path="/movie/title/:title" element={<SingleTitleView/>} />
+          <Route path="/movie/:imdbID" element={<SingleTitleView/>} />
         </Routes>
       </div>
     </Router>

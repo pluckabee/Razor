@@ -4,8 +4,74 @@ import type {
   OMDBMovie,
 } from "../types/types";
 
-const VITE_OMDB_API_KEY="5a2dc3ba"
-const OMDB_API_BASE_URL="http://www.omdbapi.com/"
+const VITE_OMDB_API_KEY = "5a2dc3ba";
+const OMDB_API_BASE_URL = "http://www.omdbapi.com/";
+const MOVIE_ID_CACHE_PREFIX = "razor:movie:id:";
+const MOVIE_TITLE_INDEX_PREFIX = "razor:movie:title:";
+
+const normalizeTitle = (title: string) => title.trim().toLowerCase();
+
+const getCachedMovieById = (imdbID: string): OMDBMovie | null => {
+  if (typeof window === "undefined" || !window.localStorage) {
+    return null;
+  }
+
+  try {
+    const cached = window.localStorage.getItem(
+      `${MOVIE_ID_CACHE_PREFIX}${imdbID}`
+    );
+    if (!cached) {
+      return null;
+    }
+    return JSON.parse(cached) as OMDBMovie;
+  } catch {
+    return null;
+  }
+};
+
+const getCachedImdbIdByTitle = (title: string): string | null => {
+  if (typeof window === "undefined" || !window.localStorage) {
+    return null;
+  }
+
+  try {
+    return window.localStorage.getItem(
+      `${MOVIE_TITLE_INDEX_PREFIX}${normalizeTitle(title)}`
+    );
+  } catch {
+    return null;
+  }
+};
+
+const setCachedMovieById = (movie: OMDBMovie) => {
+  if (typeof window === "undefined" || !window.localStorage) {
+    return;
+  }
+
+  try {
+    window.localStorage.setItem(
+      `${MOVIE_ID_CACHE_PREFIX}${movie.imdbID}`,
+      JSON.stringify(movie)
+    );
+  } catch {
+    // Ignore cache write failures (storage full, etc.)
+  }
+};
+
+const setCachedImdbIdForTitle = (title: string, imdbID: string) => {
+  if (typeof window === "undefined" || !window.localStorage) {
+    return;
+  }
+
+  try {
+    window.localStorage.setItem(
+      `${MOVIE_TITLE_INDEX_PREFIX}${normalizeTitle(title)}`,
+      imdbID
+    );
+  } catch {
+    // Ignore cache write failures (storage full, etc.)
+  }
+};
 
 class ApiService {
   private async request<T>(
@@ -43,14 +109,38 @@ class ApiService {
   }
 
   async FindMovieByTitle(title: string): Promise<ApiResponse<OMDBMovie>> {
-    //TODO Check cache first
-    return this.request(`t=${title}&type=movie`);
-    
+    const cachedImdbId = getCachedImdbIdByTitle(title);
+    if (cachedImdbId) {
+      const cachedMovie = getCachedMovieById(cachedImdbId);
+      if (cachedMovie) {
+        return {
+          success: true,
+          data: cachedMovie,
+        };
+      }
+    }
+
+    const response = await this.request<OMDBMovie>(`t=${title}&type=movie`);
+    if (response.success && response.data) {
+      setCachedMovieById(response.data);
+      setCachedImdbIdForTitle(title, response.data.imdbID);
+    }
+    return response;
   }
 
   async FindMovieById(id: string): Promise<ApiResponse<OMDBMovie>> {
-    //TODO Check cache first
-    return this.request(`i=${id}&type=movie`);
+      const cachedMovie = getCachedMovieById(id);
+      if (cachedMovie) {
+        return {
+          success: true,
+          data: cachedMovie,
+        };
+      }
+      const response = await this.request<OMDBMovie>(`i=${id}&type=movie`);
+      if (response.success && response.data) {
+        setCachedMovieById(response.data);
+      }
+      return response;
   }
 }
 

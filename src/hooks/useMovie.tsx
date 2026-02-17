@@ -3,7 +3,15 @@ import type { OMDBMovie } from "../types/types";
 
 import { apiService } from "../services/movie-api";
 
-export const useMovie = ({ title, imdbID }: {title?: string, imdbID?:string}) => {
+export const useMovie = ({
+  title,
+  imdbID,
+  enabled = true,
+}: {
+  title?: string;
+  imdbID?: string;
+  enabled?: boolean;
+}) => {
   const [movie, setMovie] = useState<OMDBMovie>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,8 +39,10 @@ export const useMovie = ({ title, imdbID }: {title?: string, imdbID?:string}) =>
   }, [title, imdbID]);
 
   useEffect(() => {
-    loadMovie();
-  }, [loadMovie]);
+    if (enabled) {
+      loadMovie();
+    }
+  }, [enabled, loadMovie]);
 
   return { movie, isLoading, error, loadMovie };
 };

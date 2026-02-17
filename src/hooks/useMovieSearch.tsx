@@ -3,7 +3,7 @@ import type { OMDBSearchResponse } from "../types/types";
 
 import { apiService } from "../services/movie-api";
 
-export const useMovies = () => {
+export const useMovieSearch = () => {
   const [moviePage, setMoviePage] = useState<OMDBSearchResponse>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
