@@ -23,10 +23,10 @@ export function UserReviewCard({
   const currentReview = movieReviews.find((review) => review.userId === userId);
 
   const [score, setScore] = useState<number>(
-    () => (currentReview?.score ? Number(currentReview.score) : 3)
+    () => (currentReview?.score ? Number(currentReview.score) : 0)
   );
   const [rating, setRating] = useState<MovieReview["rating"]>(
-    () => currentReview?.rating ?? "Just Okay"
+    () => currentReview?.rating
   );
   const [reviewText, setReviewText] = useState<MovieReview["review"]>(
     () => currentReview?.review ?? ""
@@ -54,8 +54,8 @@ export function UserReviewCard({
     setIsEditing(false);
   };
 
-  const resolvedRating = currentReview?.rating ?? rating;
-  const resolvedReview = currentReview?.review ?? reviewText;
+  const hasScore = Boolean(currentReview?.score);
+
 
   return (
     <section className="single-title__reviews">
@@ -71,30 +71,43 @@ export function UserReviewCard({
       </div>
       {!isEditing ? (
         <div className="single-title__review-summary">
-          <div className="single-title__tickets">
-            {Array.from({ length: 5 }).map((_, index) => {
-              const isActive = index < score;
-              return (
-                <ConfirmationNumberIcon
-                  key={`ticket-${index}`}
-                  className={`single-title__ticket${isActive ? " is-active" : ""}`}
-                  aria-hidden="true"
-                />
-              );
-            })}
+          <div>
+            <div className="single-title__tickets">
+              {Array.from({ length: 5 }).map((_, index) => {
+                const isActive = hasScore && index < score;
+                return (
+                  <ConfirmationNumberIcon
+                    key={`ticket-${index}`}
+                    className={`single-title__ticket${isActive ? " is-active" : ""}`}
+                    aria-hidden="true"
+                  />
+                );
+              })}
+            </div>
+            {!hasScore ? (
+              <span className="single-title__empty-subline">no user score</span>
+            ) : null}
           </div>
-          <blockquote className="single-title__rating-quote">
-            {resolvedRating ?? "No rating yet"}
-          </blockquote>
-          {resolvedReview ? (
+          <div>
+            <blockquote className="single-title__rating-quote">
+              {!currentReview?.rating ? "..." : currentReview.rating}
+            </blockquote>
+            {!currentReview?.rating ? (
+              <span className="single-title__empty-subline">no user rating</span>
+            ) : null}
+          </div>
+          {currentReview?.review ? (
             <div>
               <h3>Review</h3>
-              <p className="single-title__review-copy">{resolvedReview}</p>
+              <p className="single-title__review-copy">{currentReview.review}</p>
             </div>
           ) : (
-            <p className="single-title__review-copy is-empty">
-              Add your take on this film.
-            </p>
+            <>
+              <p className="single-title__review-copy is-empty">
+                Add your take on this film.
+              </p>
+              <span className="single-title__empty-subline">no user review</span>
+            </>
           )}
         </div>
       ) : null}

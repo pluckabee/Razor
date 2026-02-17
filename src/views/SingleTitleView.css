@@ -107,12 +107,14 @@
 .single-title__review-summary {
   display: grid;
   gap: 0.75rem;
+  text-align: center;
 }
 
 .single-title__tickets {
   display: flex;
   gap: 0.4rem;
   color: rgba(47, 48, 97, 0.3);
+  justify-content: center;
 }
 
 .single-title__ticket {
@@ -165,6 +167,15 @@
 
 .single-title__review-copy.is-empty {
   color: rgba(52, 52, 52, 0.6);
+}
+
+.single-title__empty-subline {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(52, 52, 52, 0.55);
 }
 
 .single-title__review-form {
