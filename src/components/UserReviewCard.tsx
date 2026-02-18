@@ -217,9 +217,7 @@ export function UserReviewCard({
           <span className="user-review-card__subline">
             {hoverReview
               ? "update review"
-              : currentReview?.review
-                ? ""
-                : "no user review"}
+              : ""}
           </span>
         </div>
       </div>

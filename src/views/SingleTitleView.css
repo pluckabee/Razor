@@ -2,7 +2,7 @@
   display: grid;
   gap: 2rem;
   padding: 1rem 0 3rem;
-  color: var(--color-graphite-gray);
+ color: var(--color-twilight-indigo);
 }
 
 .single-title__hero {
@@ -10,10 +10,11 @@
   grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
   gap: 2rem;
   align-items: start;
-  background: var(--color-mint-green);
+  background: var(--color-twilight-indigo);
   padding: 2rem;
   border-radius: 20px;
   box-shadow: 0 16px 40px rgba(47, 48, 97, 0.15);
+  color: #ffffff
 }
 
 .single-title__poster img {
@@ -26,18 +27,18 @@
 .single-title__headline h1 {
   font-size: 2.8rem;
   margin: 0 0 0.75rem;
-  color: var(--color-twilight-indigo);
+  color: var(--color-steel-blue);
 }
 
 .single-title__year {
   font-weight: 500;
   margin-left: 0.5rem;
-  color: var(--color-steel-blue);
+  color: var(--color-royal-gold);
 }
 
 .single-title__tagline {
   font-weight: 600;
-  color: var(--color-steel-blue);
+  color: var(--color-royal-gold);
   margin-bottom: 1rem;
 }
 
@@ -98,7 +99,7 @@
   justify-content: space-between;
   padding: 0.75rem 1rem;
   border-radius: 12px;
-  background: rgba(255, 230, 109, 0.2);
+  background: rgba(109, 153, 255, 0.2);
 }
 
 .single-title__extra {

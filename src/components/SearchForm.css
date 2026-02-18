@@ -1,4 +1,4 @@
-.search-container > .MuiInputBase-root {
+.search-container .MuiInputBase-root {
   border-radius: 28px!important;
   background-color: var(--color-mint-green);
 }

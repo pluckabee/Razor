@@ -63,7 +63,7 @@ export function SingleTitleView() {
             <div>
               <h2>Critics & Ratings</h2>
               <p className="single-title__metascore">
-                Metacritic: <strong>{movie.Metascore}</strong>
+                IMDb:  <strong>{movie.imdbRating}</strong> ({movie.imdbVotes} votes)
               </p>
             </div>
             <div className="single-title__ratings">
@@ -75,7 +75,6 @@ export function SingleTitleView() {
               ))}
             </div>
             <div className="single-title__extra">
-              <span>IMDb: {movie.imdbRating} ({movie.imdbVotes} votes)</span>
               <span>Released: {movie.Released}</span>
               <span>Box Office: {movie.BoxOffice}</span>
               <span>Language: {movie.Language}</span>
