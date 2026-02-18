@@ -41,29 +41,31 @@ export function Header({
           <span>{backLabel}</span>
         </Link>
       ) : null}
-      <div className="app-header__icon-container">
-        <ConfirmationNumberIcon
-          className="app-header__icon"
-          aria-hidden="true"
-        />
-        <ConfirmationNumberIcon
-          className="app-header__icon"
-          aria-hidden="true"
-        />
-        <ConfirmationNumberIcon
-          className="app-header__icon"
-          aria-hidden="true"
-        />
-        <ConfirmationNumberIcon
-          className="app-header__icon"
-          aria-hidden="true"
-        />
-        <ConfirmationNumberIcon
-          className="app-header__icon"
-          aria-hidden="true"
-        />
-      </div>
-      <span className="app-header__title">Razor Film Reviews</span>
+      <Link className="app-header__home-link" to="/" aria-label="Go home">
+        <div className="app-header__icon-container">
+          <ConfirmationNumberIcon
+            className="app-header__icon"
+            aria-hidden="true"
+          />
+          <ConfirmationNumberIcon
+            className="app-header__icon"
+            aria-hidden="true"
+          />
+          <ConfirmationNumberIcon
+            className="app-header__icon"
+            aria-hidden="true"
+          />
+          <ConfirmationNumberIcon
+            className="app-header__icon"
+            aria-hidden="true"
+          />
+          <ConfirmationNumberIcon
+            className="app-header__icon"
+            aria-hidden="true"
+          />
+        </div>
+        <span className="app-header__title">Razor Film Reviews</span>
+      </Link>
     </header>
   );
 }

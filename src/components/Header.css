@@ -39,6 +39,10 @@
   color: var(--color-steel-blue);
 }
 
+.app-header__home-link:hover .app-header__title {
+  color: var(--color-steel-blue);
+}
+
 .app-header--small .app-header__icon-container .app-header__icon {
   display: none
 }

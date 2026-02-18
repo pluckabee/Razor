@@ -4,8 +4,6 @@ import type {
   OMDBMovie,
 } from "../types/types";
 
-const VITE_OMDB_API_KEY = "5a2dc3ba";
-const OMDB_API_BASE_URL = "http://www.omdbapi.com/";
 const MOVIE_ID_CACHE_PREFIX = "razor:movie:id:";
 const MOVIE_TITLE_INDEX_PREFIX = "razor:movie:title:";
 
@@ -79,7 +77,7 @@ class ApiService {
   ): Promise<ApiResponse<T>> {
     try {
       const response = await fetch(
-        `${OMDB_API_BASE_URL}?apiKey=${VITE_OMDB_API_KEY}&${queryString}`
+        `${import.meta.env.VITE_OMDB_API_BASE_URL}?apiKey=${import.meta.env.VITE_OMDB_API_KEY}&${queryString}`
       );
 
       const data = await response.json();
